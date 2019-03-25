@@ -1,6 +1,6 @@
 module Main where
 
-import Board
+import Controller
 
 main :: IO ()
-main = print initialBoard
+main = startGame
