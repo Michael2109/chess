@@ -2,7 +2,7 @@ module Controller where
 
 import System.IO
 
-import Board
+import Chessboard
 
 startGame :: IO()
 startGame = do

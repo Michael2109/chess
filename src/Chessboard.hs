@@ -1,17 +1,16 @@
-module Board
+module Chessboard
   ( Chessboard
   , initialBoard
   , changeColour
   , colour
   ) where
 
+import Position
+import Colour
+import Move
+
 import qualified Data.Char as C
 import           Data.List
-
-data Colour
-  = White
-  | Black
-  deriving (Eq, Show)
 
 data PieceType
   = Pawn
@@ -104,6 +103,10 @@ changeColour chessboard =
   case (colour chessboard) of
     White -> Black
     Black -> White
+
+possibleMoves :: Chessboard -> Piece -> [Move]
+possibleMoves chessboard piece = []
+
 {-
 availableMoves :: Pieces -> Int -> Int -> [(Int, Int)]
 availableMoves pieces x y =
