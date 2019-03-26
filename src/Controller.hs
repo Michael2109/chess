@@ -8,9 +8,8 @@ startGame :: IO()
 startGame = do
   putStrLn "Starting chess:"
   loop initialBoard
-
-  where
     -- Use recursion for loop
+  where
     loop :: Chessboard -> IO ()
     loop currentChessboard = do
       input <- getLine
@@ -18,7 +17,6 @@ startGame = do
         then do
           let newChessboard = changeColour currentChessboard
           print newChessboard
-          putStrLn $ "Next move: " ++ (show $ (colour newChessboard))
+          putStrLn $ "Next move: " ++ show (colour newChessboard)
           loop newChessboard
-        else
-          return ()
+        else return ()

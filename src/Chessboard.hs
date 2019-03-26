@@ -3,6 +3,7 @@ module Chessboard
   , initialBoard
   , changeColour
   , colour
+  , pieceAtPosition
   ) where
 
 import Position
@@ -41,6 +42,9 @@ data Chessboard = Chessboard
   { pieces :: [[Maybe Piece]]
   , colour :: Colour
   }
+
+pieceAtPosition :: Chessboard -> Position -> Maybe Piece
+pieceAtPosition chessboard (x, y) = ((pieces chessboard) !! y) !! x
 
 initialBoard :: Chessboard
 initialBoard =
