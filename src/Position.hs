@@ -1,10 +1,12 @@
 module Position (
-  Position,
-  valid)
+  Position(..),
+  validPosition)
   where
 
 type Position = (Int, Int)
 
-valid :: Position -> Bool
-valid (x, y) = valid' x && valid' y
+validPosition :: Position -> Bool
+validPosition (x, y) = valid' x && valid' y
   where valid' value = value >= 0 && value <= 7
+
+

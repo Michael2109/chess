@@ -1,9 +1,12 @@
 module Chessboard
   ( Chessboard
+  , Piece(..)
+  , PieceType(..)
   , initialBoard
   , changeColour
   , colour
   , pieceAtPosition
+  , pieceColourAtPosition
   ) where
 
 import Position
@@ -45,6 +48,12 @@ data Chessboard = Chessboard
 
 pieceAtPosition :: Chessboard -> Position -> Maybe Piece
 pieceAtPosition chessboard (x, y) = ((pieces chessboard) !! y) !! x
+
+pieceColourAtPosition :: Chessboard -> Position -> Maybe Colour
+pieceColourAtPosition chessboard (x, y) = case (pieceAtPosition chessboard (x, y)) of
+  Just pieceOpt -> case pieceOpt of
+    Piece colour _ -> Just colour
+  Nothing -> Nothing
 
 initialBoard :: Chessboard
 initialBoard =
@@ -107,17 +116,3 @@ changeColour chessboard =
   case (colour chessboard) of
     White -> Black
     Black -> White
-
-possibleMoves :: Chessboard -> Piece -> [Move]
-possibleMoves chessboard piece = []
-
-{-
-availableMoves :: Pieces -> Int -> Int -> [(Int, Int)]
-availableMoves pieces x y =
-  case ((cells pieces) !! y !! y of
-    Pawn side -> [(0, 1)]
-
-
-pieceMoves :: Piece ->-}
--- Change to x and y for available moves
---

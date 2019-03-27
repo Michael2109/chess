@@ -3,6 +3,8 @@ module Controller where
 import System.IO
 
 import Chessboard
+import Rules
+import Position
 
 startGame :: IO()
 startGame = do
@@ -18,5 +20,7 @@ startGame = do
           let newChessboard = changeColour currentChessboard
           print newChessboard
           putStrLn $ "Next move: " ++ show (colour newChessboard)
+
+          print $ show (possibleMoves newChessboard (1, 0))
           loop newChessboard
         else return ()

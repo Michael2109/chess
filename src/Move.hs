@@ -1,5 +1,5 @@
 module Move
-  (Move)
+  (Move(..))
   where
 
 import Position
