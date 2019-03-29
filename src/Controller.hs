@@ -1,26 +1,34 @@
 module Controller where
 
 import System.IO
+import Control.Monad
 
 import Chessboard
 import Rules
 import Position
+import Decisions
+import Colour
 
 startGame :: IO()
 startGame = do
   putStrLn "Starting chess:"
+  printChessboard initialBoard
   loop initialBoard
-    -- Use recursion for loop
   where
     loop :: Chessboard -> IO ()
-    loop currentChessboard = do
+    loop chessboard = do
       input <- getLine
-      if input /= "q"
-        then do
-          let newChessboard = changeColour currentChessboard
-          print newChessboard
-          putStrLn $ "Next move: " ++ show (colour newChessboard)
+      Control.Monad.when (input /= "q") $ do
+      
+        putStrLn "Calculating best move"
 
-          print $ show (possibleMoves newChessboard (1, 0))
-          loop newChessboard
-        else return ()
+        let move = bestMove chessboard
+        putStrLn $ show move
+        let newChessboard = makeMove chessboard move
+        printChessboard newChessboard
+        loop newChessboard
+
+printChessboard :: Chessboard -> IO ()
+printChessboard chessboard = do
+  putStrLn $ show chessboard
+  putStrLn ""

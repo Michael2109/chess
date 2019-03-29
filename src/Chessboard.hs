@@ -7,6 +7,8 @@ module Chessboard
   , colour
   , pieceAtPosition
   , pieceColourAtPosition
+  , getPiecePositionsWithColour
+  , makeMove
   ) where
 
 import Position
@@ -50,10 +52,12 @@ pieceAtPosition :: Chessboard -> Position -> Maybe Piece
 pieceAtPosition chessboard (x, y) = ((pieces chessboard) !! y) !! x
 
 pieceColourAtPosition :: Chessboard -> Position -> Maybe Colour
-pieceColourAtPosition chessboard (x, y) = case (pieceAtPosition chessboard (x, y)) of
-  Just pieceOpt -> case pieceOpt of
-    Piece colour _ -> Just colour
-  Nothing -> Nothing
+pieceColourAtPosition chessboard (x, y) =
+  case pieceAtPosition chessboard (x, y) of
+    Just pieceOpt ->
+      case pieceOpt of
+        Piece colour _ -> Just colour
+    Nothing -> Nothing
 
 initialBoard :: Chessboard
 initialBoard =
@@ -102,17 +106,45 @@ initialBoard =
     White
 
 instance Show Chessboard where
-  show (Chessboard cells colour) = intercalate "\n" (map (\element -> intercalate " " (map showPiece element)) cells)
+  show (Chessboard cells colour) = intercalate "\n" (map (intercalate " " . map showPiece) cells) ++ "\nMove: " ++ show colour
+
+makeMove :: Chessboard -> Move -> Chessboard
+makeMove chessboard move = do
+  let originalPieces = pieces chessboard
+  let originalColour = colour chessboard
+
+  case move of
+    Move (x1, y1) (x2, y2) -> do
+      let pieceToMove = pieceAtPosition chessboard (x1, y1)
+      let movedPiece = setPiece chessboard pieceToMove (x2, y2)
+      let newChessboard = setPiece movedPiece Nothing (x1, y1)
+      Chessboard (pieces newChessboard) (changeColour $ colour newChessboard)
+
+setPiece :: Chessboard -> Maybe Piece -> Position -> Chessboard
+setPiece chessboard piece (x, y) = do
+    let originalPieces = pieces chessboard
+    let newRow = replaceNth x piece (originalPieces !! y)
+    Chessboard (replaceNth y newRow originalPieces) (colour chessboard)
+
+replaceNth :: Int -> a -> [a] -> [a]
+replaceNth _ _ [] = []
+replaceNth n newVal (x:xs)
+   | n == 0 = newVal:xs
+   | otherwise = x:replaceNth (n-1) newVal xs
+
+getPiecePositionsWithColour :: Chessboard -> Colour -> [Position]
+getPiecePositionsWithColour chessboard colour = do
+  let positions = concat $ map (\x -> map (\y -> (x, y)) [0..7]) [0..7]
+  filter (\position -> pieceColourAtPosition chessboard position == Just colour) positions
 
 showPiece :: Maybe Piece -> String
 showPiece piece =
   case piece of
     Just value -> show value
-    Nothing    -> ""
+    Nothing    -> " "
 
-changeColour :: Chessboard -> Chessboard
-changeColour chessboard =
-  Chessboard (pieces chessboard) $
-  case (colour chessboard) of
+changeColour :: Colour -> Colour
+changeColour colour =
+  case colour of
     White -> Black
     Black -> White
