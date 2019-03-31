@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dfdee14-9a61-4c05-bff9-03fe77a8e32e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Decisions.hs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Chessboard.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chessboard.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Position.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Position.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Decisions.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Decisions.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Move.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move.hs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rules.hs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rules.hs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.stack-work/" />
@@ -21,11 +19,11 @@
     <session id="-391240627">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="4" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -46,17 +44,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="hs" value="6595" />
+          <entry key="hs" value="7968" />
           <entry key="md" value="2" />
-          <entry key="txt" value="14" />
+          <entry key="txt" value="91" />
           <entry key="yaml" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Haskell" value="6595" />
+          <entry key="Haskell" value="7968" />
           <entry key="Markdown" value="2" />
-          <entry key="PLAIN_TEXT" value="14" />
+          <entry key="PLAIN_TEXT" value="91" />
           <entry key="YAML" value="36" />
         </counts>
       </usages-collector>
@@ -119,34 +117,25 @@
         <entry file="file://$PROJECT_DIR$/src/Move.hs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
-              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Chessboard.hs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2079">
+              <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Chessboard.hs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="119" column="62" lean-forward="true" selection-start-line="119" selection-start-column="62" selection-end-line="119" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Decisions.hs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Rules.hs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="165">
+              <caret line="63" column="89" lean-forward="true" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -257,11 +246,11 @@
         <option value="$PROJECT_DIR$/test/Spec.hs" />
         <option value="$PROJECT_DIR$/package.yaml" />
         <option value="$PROJECT_DIR$/src/Position.hs" />
-        <option value="$PROJECT_DIR$/src/Move.hs" />
-        <option value="$PROJECT_DIR$/src/Decisions.hs" />
-        <option value="$PROJECT_DIR$/src/Rules.hs" />
         <option value="$PROJECT_DIR$/src/Controller.hs" />
         <option value="$PROJECT_DIR$/src/Chessboard.hs" />
+        <option value="$PROJECT_DIR$/src/Decisions.hs" />
+        <option value="$PROJECT_DIR$/src/Move.hs" />
+        <option value="$PROJECT_DIR$/src/Rules.hs" />
       </list>
     </option>
   </component>
@@ -293,6 +282,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -314,13 +305,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="Chess&#9;null&#9;null" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553868135976" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553868169056" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15234375" />
@@ -411,13 +400,21 @@
       <option name="project" value="LOCAL" />
       <updated>1553462725005</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Pieces take turns and move to the first of their possible moves.">
+      <created>1553868197988</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1553868197988</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10139165" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.102982104" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -436,7 +433,7 @@
       <window_info anchor="bottom" id="Tool Output" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.23210412" />
       <window_info anchor="bottom" id="Statistic" order="10" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="11" visible="true" weight="0.32917318" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32917318" />
       <window_info anchor="bottom" id="ANTLR Preview" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.23634945" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="14" />
@@ -458,7 +455,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added pieces." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pieces." />
+    <MESSAGE value="Pieces take turns and move to the first of their possible moves." />
+    <option name="LAST_COMMIT_MESSAGE" value="Pieces take turns and move to the first of their possible moves." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -531,10 +529,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Decisions.hs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller.hs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Move.hs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
-          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Chessboard.hs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2079">
+          <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -568,36 +594,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rules.hs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller.hs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Decisions.hs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Chessboard.hs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="119" column="62" lean-forward="true" selection-start-line="119" selection-start-column="62" selection-end-line="119" selection-end-column="62" />
+        <state relative-caret-position="165">
+          <caret line="63" column="89" lean-forward="true" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
         </state>
       </provider>
     </entry>

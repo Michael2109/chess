@@ -1,11 +1,13 @@
 module Move
-  (Move(..))
-  where
+  ( Move(..)
+  ) where
 
-import Position
-import Colour
+import           Colour
+import           Position
 
-data Move = Move Position Position
+data Move
+  = Move { startPosition :: Position
+         , endPosition   :: Position }
   | KingSideCastling Colour
   | QueenSideCastling Colour
   deriving (Show)

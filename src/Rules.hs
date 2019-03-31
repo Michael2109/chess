@@ -25,8 +25,13 @@ movesInDirection :: Chessboard -> Position -> Position -> Position -> Colour -> 
 movesInDirection chessboard startPosition currentPosition direction colour movesLeft = do
   let nextPosition = addPositions currentPosition direction
   let nextMove = Move startPosition nextPosition
-  if movesLeft /= 0 && validMove chessboard nextMove
-    then nextMove : (movesInDirection chessboard startPosition nextPosition direction colour (movesLeft - 1))
+  if movesLeft /= 0 && validPosition nextPosition
+    then if takingAPiece chessboard nextMove
+           then [nextMove]
+           else if movingToEmptySpace chessboard nextMove
+                  then nextMove :
+                       movesInDirection chessboard startPosition nextPosition direction colour (movesLeft - 1)
+                  else []
     else []
 
 rookMoves :: Chessboard -> Position -> Colour -> [Move]
@@ -40,7 +45,9 @@ knightMoves chessboard (x, y) colour = do
         map
           (\offset -> Move (x, y) ((fst offset + x), snd offset + y))
           [(-2, -1), (-2, 1), (2, -1), (2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2)]
-  filter (\move -> validMove chessboard move) newMoves
+  filter
+    (\move -> (validPosition $ endPosition move) && (takingAPiece chessboard move || movingToEmptySpace chessboard move))
+    newMoves
 
 bishopMoves :: Chessboard -> Position -> Colour -> [Move]
 bishopMoves chessboard position colour = do
@@ -63,15 +70,24 @@ pawnMoves chessboard position colour = do
         if colour == White
           then (0, -1)
           else (0, 1)
-  let moves = movesInDirection chessboard position position direction colour 1
+  let forwardMoves = movesInDirection chessboard position position direction colour 1
+
+  let attackDirections =
+        if colour == White
+          then [(-1, -1), (1, -1)]
+          else [(-1, 1), (1, 1)]
+
+  let attackMoves =
+        filter (takingAPiece chessboard) $ concat $ map (\attackDirection -> movesInDirection chessboard position position attackDirection colour 1) attackDirections
+
   filter
     (\move ->
        case move of
          Move startPos endPos -> pieceColourAtPosition chessboard endPos == Nothing)
-    moves
+    forwardMoves ++ attackMoves
 
-validMove :: Chessboard -> Move -> Bool
-validMove chessboard move =
+takingAPiece :: Chessboard -> Move -> Bool
+takingAPiece chessboard move =
   case move of
     Move startPos endPos ->
       (validPosition startPos && validPosition endPos) &&
@@ -81,5 +97,13 @@ validMove chessboard move =
             Just aColour ->
               case pieceBColour of
                 Just bColour -> aColour /= bColour
-                Nothing      -> True)
+                Nothing      -> False)
     _ -> False
+
+movingToEmptySpace :: Chessboard -> Move -> Bool
+movingToEmptySpace chessboard move =
+  case move of
+    Move startPos endPos ->
+      case pieceAtPosition chessboard endPos of
+        Nothing -> True
+        Just _  -> False
