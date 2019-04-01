@@ -134,7 +134,7 @@ replaceNth n newVal (x:xs)
    | otherwise = x:replaceNth (n-1) newVal xs
 
 getPiecePositions :: Chessboard -> [Position]
-getPiecePositions chessboard = concat $ map (\x -> map (\y -> x, y) [0..7]) [0..7]
+getPiecePositions chessboard = concat $ map (\x -> map (\y -> (x, y)) [0..7]) [0..7]
 
 getPiecePositionsWithColour :: Chessboard -> Colour -> [Position]
 getPiecePositionsWithColour chessboard colour = do

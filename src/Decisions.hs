@@ -33,7 +33,7 @@ moveScore chessboard move = case move of
 
 validMoves :: Chessboard
 validMoves chessboard = do
-   let positions = getPiecePositionsWithColour chessboard nextColour
+   let positions = getPiecePositions chessboard
    concat $ map (\position -> possibleMoves chessboard position) positions
 
 alphaBetaNegamax :: Chessboard -> Int -> Int -> Int -> Int
@@ -60,17 +60,22 @@ https://github.com/Garee/jchess/blob/master/src/model/AI.java
     return ( alpha );
     -}
 
+
     let allValidMoves = validMoves chessboard
 
     let minimumValue = minBound :: Int
 
-    map (\move -> do
-      let newChessboard = makeMove chessboard move
-      let score = -alphaBetaNegamax newChessboard (depth - 1) -beta -alpha
-      if score >= beta
-      then score
-      else if score > alpha
-      then alpha =
-    ) allValidMoves
+    let betaFound = find (\move -> do
+         let newChessboard = makeMove chessboard move
+         let score = -alphaBetaNegamax newChessboard (depth - 1) -beta -alpha
+         if score >= beta then True
+         else False) allValidMoves
+
+    case betaFound of
+      Just value -> value
+      Nothing -> filter
+
+
+
 
 
