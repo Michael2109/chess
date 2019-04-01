@@ -1,3 +1,8 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+
 .stack-work/
 chess.cabal
 *~

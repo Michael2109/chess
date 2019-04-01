@@ -7,6 +7,7 @@ module Chessboard
   , colour
   , pieceAtPosition
   , pieceColourAtPosition
+  , getPiecePositions
   , getPiecePositionsWithColour
   , makeMove
   ) where
@@ -131,6 +132,9 @@ replaceNth _ _ [] = []
 replaceNth n newVal (x:xs)
    | n == 0 = newVal:xs
    | otherwise = x:replaceNth (n-1) newVal xs
+
+getPiecePositions :: Chessboard -> [Position]
+getPiecePositions chessboard = concat $ map (\x -> map (\y -> x, y) [0..7]) [0..7]
 
 getPiecePositionsWithColour :: Chessboard -> Colour -> [Position]
 getPiecePositionsWithColour chessboard colour = do

@@ -30,3 +30,47 @@ moveScore chessboard move = case move of
     case pieceAtPosition chessboard endPos of
       Just takenPiece -> takenPoints takenPiece
       Nothing -> 0
+
+validMoves :: Chessboard
+validMoves chessboard = do
+   let positions = getPiecePositionsWithColour chessboard nextColour
+   concat $ map (\position -> possibleMoves chessboard position) positions
+
+alphaBetaNegamax :: Chessboard -> Int -> Int -> Int -> Int
+alphaBetaNegamax chessboard depth alpha beta = do
+    {-
+https://github.com/Garee/jchess/blob/master/src/model/AI.java
+      if ( board.isCheckmate() ) {
+      return ( Integer.MIN_VALUE + 1 + this.depth - depth );
+    } else if ( board.isStalemate() ) {
+      return 0;
+    } else if ( depth <= 0 ) {
+      return ( evaluator.evaluate( board ) );
+    }
+
+    int score = Integer.MIN_VALUE + 1;
+    for ( Move move : board.getValidMoves() ) {
+      Board child = new Board( board );
+      child.makeMove( move );
+      score = -alphaBetaNegamax( child, depth - 1, -beta, -alpha );
+      if ( score >= beta ) return ( score );
+      if ( score > alpha ) alpha = score;
+    }
+
+    return ( alpha );
+    -}
+
+    let allValidMoves = validMoves chessboard
+
+    let minimumValue = minBound :: Int
+
+    map (\move -> do
+      let newChessboard = makeMove chessboard move
+      let score = -alphaBetaNegamax newChessboard (depth - 1) -beta -alpha
+      if score >= beta
+      then score
+      else if score > alpha
+      then alpha =
+    ) allValidMoves
+
+
