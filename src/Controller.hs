@@ -22,9 +22,7 @@ startGame = do
       
         putStrLn "Calculating best move"
 
-        let move = bestMove chessboard
-        putStrLn $ show move
-        let newChessboard = makeMove chessboard move
+        let newChessboard = applyBestMove chessboard
         printChessboard newChessboard
         loop newChessboard
 

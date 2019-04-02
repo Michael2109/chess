@@ -1,19 +1,18 @@
-module Decisions where
+module Decisions(applyBestMove) where
 
 import Data.List
+import Data.List (sortBy)
+import Data.Function (on)
 
 import Chessboard
 import Move
 import Rules
 
-bestMove :: Chessboard -> Move
-bestMove chessboard = do
-  let nextColour = (colour chessboard)
-  let positions = getPiecePositionsWithColour chessboard nextColour
-  let moves = concat $ map (\position -> possibleMoves chessboard position) positions
-  let sortedMoves = map fst $ reverse $ sortOn snd $ map (\move -> (move, moveScore chessboard move)) moves
+applyBestMove :: Chessboard -> Chessboard
+applyBestMove chessboard = do
+    let chessboards = possibleBoards chessboard
+    (map snd $ reverse $ sortBy (flip compare `on` fst)  (map (\chessboard -> (negamax chessboard 5, chessboard)) chessboards)) !! 0
 
-  sortedMoves !! 0
 
 takenPoints :: Piece -> Int
 takenPoints piece = case piece of
@@ -31,51 +30,62 @@ moveScore chessboard move = case move of
       Just takenPiece -> takenPoints takenPiece
       Nothing -> 0
 
-validMoves :: Chessboard
-validMoves chessboard = do
+possibleBoards :: Chessboard -> [Chessboard]
+possibleBoards chessboard = do
    let positions = getPiecePositions chessboard
-   concat $ map (\position -> possibleMoves chessboard position) positions
+   let moves = concat $ map (\position -> possibleMoves chessboard position) positions
+   map (makeMove chessboard) moves
 
-alphaBetaNegamax :: Chessboard -> Int -> Int -> Int -> Int
-alphaBetaNegamax chessboard depth alpha beta = do
-    {-
-https://github.com/Garee/jchess/blob/master/src/model/AI.java
-      if ( board.isCheckmate() ) {
-      return ( Integer.MIN_VALUE + 1 + this.depth - depth );
-    } else if ( board.isStalemate() ) {
-      return 0;
-    } else if ( depth <= 0 ) {
-      return ( evaluator.evaluate( board ) );
-    }
+-- Returned colour is the winner
+checkmate :: Chessboard -> Maybe Colour
+checkmate chessboard = do
 
-    int score = Integer.MIN_VALUE + 1;
-    for ( Move move : board.getValidMoves() ) {
-      Board child = new Board( board );
-      child.makeMove( move );
-      score = -alphaBetaNegamax( child, depth - 1, -beta, -alpha );
-      if ( score >= beta ) return ( score );
-      if ( score > alpha ) alpha = score;
-    }
+   -- If win then return winning colour
+   let whitePieces = map (pieceAtPosition chessboard) $ getPiecePositionsWithColour chessboard White
+   let blackPieces = map (pieceAtPosition chessboard) $ getPiecePositionsWithColour chessboard Black
 
-    return ( alpha );
-    -}
+   if not $ kingAlive whitePieces
+     then Just Black
+     else if not $ kingAlive blackPieces
+       then Just White
+       else Nothing
 
+   where
+      kingAlive pieces = do
+        let king = find (\foundPiece -> do
+             case foundPiece of
+               Just piece -> case piece of
+                 Piece _ King -> True
+                 _ -> False
+             ) pieces
+        case king of
+          Just _ -> True
+          Nothing -> False
 
-    let allValidMoves = validMoves chessboard
+staleMate :: Chessboard -> Bool
+staleMate chessboard = do
+  -- When same move occurs three times
 
-    let minimumValue = minBound :: Int
+  -- When the next player has no available moves
 
-    let betaFound = find (\move -> do
-         let newChessboard = makeMove chessboard move
-         let score = -alphaBetaNegamax newChessboard (depth - 1) -beta -alpha
-         if score >= beta then True
-         else False) allValidMoves
+  -- 50 successive moves maqde by both players containing no capture or pawn moves
+  False
 
-    case betaFound of
-      Just value -> value
-      Nothing -> filter
+negamax :: Chessboard -> Int -> Int
+negamax chessboard depth = do
 
+    if depth == 0 then 0
+    else
 
+      case checkmate chessboard of
+        Just colour -> case colour of
+          White -> 10
+          Black -> -10
+        Nothing -> do
 
+            if staleMate chessboard
+            then 0
+            else do
 
-
+              let scores = map (\possibleBoard -> -(negamax possibleBoard $ depth - 1)) $ possibleBoards chessboard
+              maximum scores

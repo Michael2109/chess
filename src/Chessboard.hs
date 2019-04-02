@@ -2,9 +2,10 @@ module Chessboard
   ( Chessboard
   , Piece(..)
   , PieceType(..)
+  , Colour(..)
   , initialBoard
   , changeColour
-  , colour
+  , chessboardColour
   , pieceAtPosition
   , pieceColourAtPosition
   , getPiecePositions
@@ -46,7 +47,7 @@ instance Show Piece where
 
 data Chessboard = Chessboard
   { pieces :: [[Maybe Piece]]
-  , colour :: Colour
+  , chessboardColour :: Colour
   }
 
 pieceAtPosition :: Chessboard -> Position -> Maybe Piece
@@ -112,20 +113,20 @@ instance Show Chessboard where
 makeMove :: Chessboard -> Move -> Chessboard
 makeMove chessboard move = do
   let originalPieces = pieces chessboard
-  let originalColour = colour chessboard
+  let originalColour = chessboardColour chessboard
 
   case move of
     Move (x1, y1) (x2, y2) -> do
       let pieceToMove = pieceAtPosition chessboard (x1, y1)
       let movedPiece = setPiece chessboard pieceToMove (x2, y2)
       let newChessboard = setPiece movedPiece Nothing (x1, y1)
-      Chessboard (pieces newChessboard) (changeColour $ colour newChessboard)
+      Chessboard (pieces newChessboard) (changeColour $ chessboardColour newChessboard)
 
 setPiece :: Chessboard -> Maybe Piece -> Position -> Chessboard
 setPiece chessboard piece (x, y) = do
     let originalPieces = pieces chessboard
     let newRow = replaceNth x piece (originalPieces !! y)
-    Chessboard (replaceNth y newRow originalPieces) (colour chessboard)
+    Chessboard (replaceNth y newRow originalPieces) (chessboardColour chessboard)
 
 replaceNth :: Int -> a -> [a] -> [a]
 replaceNth _ _ [] = []
@@ -146,6 +147,9 @@ showPiece piece =
   case piece of
     Just value -> show value
     Nothing    -> " "
+
+changeChessboardColour :: Chessboard -> Chessboard
+changeChessboardColour chessboard = Chessboard (pieces chessboard) (changeColour $ chessboardColour chessboard)
 
 changeColour :: Colour -> Colour
 changeColour colour =
